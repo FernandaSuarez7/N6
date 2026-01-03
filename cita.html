@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>💜</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #cdb4db, #e0c3fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 22px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+      text-align: center;
+      max-width: 420px;
+      animation: fadeIn 1.5s ease;
+      z-index: 10;
+    }
+
+    h1 {
+      color: #7b2cbf;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+    }
+
+    .date {
+      font-size: 22px;
+      color: #7b2cbf;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    button {
+      background: #9d4edd;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    button:hover {
+      background: #7b2cbf;
+      transform: scale(1.08);
+    }
+
+    .heart {
+      font-size: 42px;
+      animation: pulse 1.5s infinite;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones */
+    .falling-heart {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div id="pregunta">
+      <div class="heart">💜</div>
+      <h1>Hola, mi amor</h1>
+      <p>Quería preguntarte algo muy especial…</p>
+      <p class="date">¿Te gustaría tener una cita conmigo el 6 de enero?</p>
+
+      <button onclick="aceptar()">Sí 💜</button>
+      <button onclick="aceptar()">¡Claro que sí! 💕</button>
+    </div>
+
+    <div id="respuesta" class="hidden">
+      <div class="heart">💜</div>
+      <h1>¡Sabía que dirías que sí!</h1>
+      <p style="color:#6a4c93; font-size:17px; margin-top:5px;">
+  Ese día es especial… y todos los 6 de cada mes también 💜
+</p>
+
+      <p>Entonces queda oficialmente confirmada nuestra cita 💑</p>
+      <p class="date">📅 6 de enero</p>
+      <p>No puedo esperar para verte 💖</p>
+    </div>
+  </div>
+
+  <script>
+    function aceptar() {
+      document.getElementById('pregunta').classList.add('hidden');
+      document.getElementById('respuesta').classList.remove('hidden');
+      lluviaDeCorazones();
+    }
+
+    function lluviaDeCorazones() {
+      const corazones = ['💜', '💖', '💗', '💘'];
+      const total = 40;
+
+      for (let i = 0; i < total; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('falling-heart');
+        heart.innerText = corazones[Math.floor(Math.random() * corazones.length)];
+
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
